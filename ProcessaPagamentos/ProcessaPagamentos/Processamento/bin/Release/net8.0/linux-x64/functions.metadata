@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Function",
+    "scriptFile": "Processamento.dll",
+    "entryPoint": "Processamento.Function.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "changes",
+        "direction": "In",
+        "type": "sqlTrigger",
+        "tableName": "[dbo].[table1]",
+        "connectionStringSetting": "ConnectionStrings:PagamentosDb",
+        "properties": {}
+      }
+    ]
+  },
+  {
+    "name": "ProcessarPagamentoQueue",
+    "scriptFile": "Processamento.dll",
+    "entryPoint": "Processamento.Services.ProcessarPagamentoQueueFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "mensagem",
+        "direction": "In",
+        "type": "queueTrigger",
+        "dataType": "String",
+        "queueName": "pagamentos-pendentes",
+        "connection": "AzureWebJobsStorage",
+        "properties": {}
+      }
+    ]
+  }
+]

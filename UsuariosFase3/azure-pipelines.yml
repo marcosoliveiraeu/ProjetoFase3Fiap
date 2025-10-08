@@ -1,0 +1,83 @@
+
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  #name: self-hosted
+  vmImage: 'ubuntu-latest'
+  
+variables:
+  imageName: 'fase3-usuarios-img'
+  dockerRegistry: 'fase3usuariosacr.azurecr.io'
+  containerGroupName: 'api-fase3-usuarios'
+  resourceGroup: 'grupo3' 
+  location: 'westus2'           
+  containerPort: '8080'
+
+stages:
+  - stage: Build
+    displayName: 'Build e Docker Image'
+    jobs:
+      - job: BuildAndPush
+        steps:
+          - task: UseDotNet@2
+            inputs:
+              packageType: 'sdk'
+              version: '9.0.x'
+
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+              zipAfterPublish: false
+
+          - task: Docker@2
+            displayName: 'Build Docker image'
+            inputs:
+              containerRegistry: 'Fase3UsuariosAcrConnection'
+              repository: $(imageName)
+              command: 'buildAndPush'
+              Dockerfile: '**/Dockerfile'
+              tags: |
+                latest
+                $(Build.BuildId)
+
+  - stage: Deploy
+    displayName: 'Deploy para Container Instance'
+    dependsOn: Build
+    jobs:
+      - job: DeployToACI
+        steps:
+          - task: AzureCLI@2
+            displayName: 'Atualiza Container Instance'
+            inputs:
+              azureSubscription: 'FiapConnection'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az container delete \
+                  --name $(containerGroupName) \
+                  --resource-group $(resourceGroup) \
+                  --yes
+
+                az container create \
+                  --resource-group $(resourceGroup) \
+                  --name $(containerGroupName) \
+                  --image $(dockerRegistry)/$(imageName):latest \
+                  --registry-login-server $(dockerRegistry) \
+                  --registry-username $(ACR_USERNAME) \
+                  --registry-password $(ACR_PASSWORD) \
+                  --dns-name-label $(containerGroupName)-dns \
+                  --ports $(containerPort) \
+                  --cpu 1 \
+                  --memory 1.5 \
+                  --location $(location) \
+                  --log-analytics-workspace 'f8b4ac94-8c26-400f-bd9d-72bed52ed183' \
+                  --log-analytics-workspace-key 'wTb+fo5ts3l01JvUQq3bBT2qB/Oeqjv/6ft+Aavk7rdwv+L47PS8YWQl+HoUvMa/Y8ONHiDyU4721kuAYkoqfA=='\
+                  --os-type Linux
+            env:
+              ACR_USERNAME: $(ACR_USERNAME)
+              ACR_PASSWORD: $(ACR_PASSWORD)

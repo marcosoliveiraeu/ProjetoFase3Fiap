@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Pagamentos\\Pagamentos.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "Processamento\\Processamento.csproj",
+        "Action": "Start",
+        "DebugTarget": "Processamento"
+      }
+    ]
+  }
+]

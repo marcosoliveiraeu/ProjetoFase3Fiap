@@ -1,0 +1,82 @@
+[
+  {
+    "ContainingType": "Pagamentos.API.Controllers.PagamentosController",
+    "Method": "CriarPagamento",
+    "RelativePath": "api/Pagamentos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pagamentoDto",
+        "Type": "Pagamentos.Application.DTOs.CriaPagamentoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pagamentos.API.Controllers.PagamentosController",
+    "Method": "ObterPagamentoPorId",
+    "RelativePath": "api/Pagamentos/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pagamentos.API.Controllers.PagamentosController",
+    "Method": "CancelarPagamento",
+    "RelativePath": "api/Pagamentos/{id}/cancelar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pagamentos.API.Controllers.PagamentosController",
+    "Method": "ObterTransacoesPagamento",
+    "RelativePath": "api/Pagamentos/{id}/transacoes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Pagamentos.API.Controllers.PagamentosController",
+    "Method": "ObterPagamentosPorUsuario",
+    "RelativePath": "api/Pagamentos/usuario/{usuarioId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
