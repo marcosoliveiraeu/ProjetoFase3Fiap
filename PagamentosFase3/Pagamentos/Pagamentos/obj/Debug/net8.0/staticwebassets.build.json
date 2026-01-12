@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"2AL83C+BpLl96rcfkBDhDY0GD2SHFnVxsy3VfEl9Y2Y=","Source":"Pagamentos","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "OSE4Hor1SkG1kdUeYAeHBLJyg5HSCy+Cq+/kcPoLDWE=",
+  "Source": "Pagamentos",
+  "BasePath": "_content/Pagamentos",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

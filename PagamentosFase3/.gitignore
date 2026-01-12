@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Pagamentos/.vs
+/Pagamentos/Pagamentos/obj
+/Pagamentos/Pagamentos/bin/Debug/net8.0

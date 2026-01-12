@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pagamentos-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pagamentos-api
+  template:
+    metadata:
+      labels:
+        app: pagamentos-api
+    spec:
+      containers:
+        - name: pagamentos-api
+          image: fase3pagamentosacr.azurecr.io/fase3-pagamentos-img:latest
+          ports:
+            - containerPort: 8080
+
+
+          env:
+            - name: ASPNETCORE_PATHBASE
+              value: "/pagamentos"
+
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: pagamentos-config
+                  key: DB_SERVER
+
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: pagamentos-config
+                  key: DB_NAME
+
+            - name: DB_ENCRYPT
+              valueFrom:
+                configMapKeyRef:
+                  name: pagamentos-config
+                  key: DB_ENCRYPT
+
+            - name: DB_TRUST_CERT
+              valueFrom:
+                configMapKeyRef:
+                  name: pagamentos-config
+                  key: DB_TRUST_CERT
+
+            - name: DB_TIMEOUT
+              valueFrom:
+                configMapKeyRef:
+                  name: pagamentos-config
+                  key: DB_TIMEOUT
+
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pagamentos-secrets
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pagamentos-secrets
+                  key: DB_PASSWORD
+
+
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 256Mi

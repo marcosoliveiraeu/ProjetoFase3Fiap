@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: usuarios-ingress
+  namespace: fase3
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /usuarios(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: usuarios-service
+                port:
+                  number: 80
+

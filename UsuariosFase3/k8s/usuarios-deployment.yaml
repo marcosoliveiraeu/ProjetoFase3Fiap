@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usuarios-api
+  namespace: fase3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usuarios-api
+  template:
+    metadata:
+      labels:
+        app: usuarios-api
+    spec:
+      containers:
+        - name: usuarios-api
+          image: fase3usuariosacr.azurecr.io/fase3-usuarios-img:latest
+          ports:
+            - containerPort: 8080
+
+          env:
+            - name: ASPNETCORE_PATHBASE
+              value: "/usuarios"
+            
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: usuarios-config
+                  key: DB_SERVER
+
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: usuarios-config
+                  key: DB_NAME
+
+            - name: DB_ENCRYPT
+              valueFrom:
+                configMapKeyRef:
+                  name: usuarios-config
+                  key: DB_ENCRYPT
+
+            - name: DB_TRUST_CERT
+              valueFrom:
+                configMapKeyRef:
+                  name: usuarios-config
+                  key: DB_TRUST_CERT
+
+            - name: DB_TIMEOUT
+              valueFrom:
+                configMapKeyRef:
+                  name: usuarios-config
+                  key: DB_TIMEOUT
+
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: usuarios-secrets
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: usuarios-secrets
+                  key: DB_PASSWORD
+
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 256Mi

@@ -14,8 +14,42 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var envFull = Environment.GetEnvironmentVariable("DB_CONNECTIONSTRING");
+string connectionString;
+
+if (!string.IsNullOrWhiteSpace(envFull))
+{
+    connectionString = envFull;
+}
+else
+{
+    var server = Environment.GetEnvironmentVariable("DB_SERVER");
+    if (!string.IsNullOrWhiteSpace(server))
+    {
+        var database = Environment.GetEnvironmentVariable("DB_NAME") ?? string.Empty;
+        var user = Environment.GetEnvironmentVariable("DB_USER") ?? string.Empty;
+        var password = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? string.Empty;
+        var encrypt = Environment.GetEnvironmentVariable("DB_ENCRYPT") ?? "True";
+        var trustCert = Environment.GetEnvironmentVariable("DB_TRUST_CERT") ?? "False";
+        var timeout = Environment.GetEnvironmentVariable("DB_TIMEOUT") ?? "30";
+
+        connectionString =
+            $"Server={server};" +
+            $"Initial Catalog={database};" +
+            $"User ID={user};" +
+            $"Password={password};" +
+            $"Encrypt={encrypt};" +
+            $"TrustServerCertificate={trustCert};" +
+            $"Connection Timeout={timeout};";
+    }
+    else
+    {
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    }
+}
+
 builder.Services.AddDbContext<DbContextFCG>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseSqlServer(connectionString));
 
 
 builder.Services.AddScoped<IJogoService, JogoService>();
@@ -36,14 +70,41 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+var pathBase = Environment.GetEnvironmentVariable("ASPNETCORE_PATHBASE");
+if (!string.IsNullOrEmpty(pathBase))
+{
+    app.UsePathBase(pathBase);
+}
+
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger(c =>
+{
+    c.PreSerializeFilters.Add((swagger, httpReq) =>
+    {
+        swagger.Servers = new List<Microsoft.OpenApi.Models.OpenApiServer>
+        {
+            new Microsoft.OpenApi.Models.OpenApiServer
+            {
+                Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{pathBase}"
+            }
+        };
+    });
+});
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint($"{pathBase}/swagger/v1/swagger.json", "Usuarios API v1");
+    c.RoutePrefix = "swagger";
+});
+
+
+
 //}
 
-//app.UseHttpsRedirection();
+app.UseRouting();
+
 
 app.UseCors("CorsPolicy");
 

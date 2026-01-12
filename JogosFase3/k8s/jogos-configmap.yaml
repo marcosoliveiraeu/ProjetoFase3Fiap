@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jogos-config
+  namespace: fase3
+data:
+  DB_SERVER: "tcp:fase3-jogos-server.database.windows.net,1433"
+  DB_NAME: "JogosDB"
+  DB_ENCRYPT: "true"
+  DB_TRUST_CERT: "false"
+  DB_TIMEOUT: "30"
+
+

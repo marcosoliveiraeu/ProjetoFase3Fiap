@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jogos-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jogos-api
+  template:
+    metadata:
+      labels:
+        app: jogos-api
+    spec:
+      containers:
+        - name: jogos-api
+          image: fase3jogosacr.azurecr.io/fase3-jogos-img:latest
+          ports:
+            - containerPort: 8080
+            
+            
+          env:
+            - name: ASPNETCORE_PATHBASE
+              value: "/jogos"
+
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: jogos-config
+                  key: DB_SERVER
+
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: jogos-config
+                  key: DB_NAME
+
+            - name: DB_ENCRYPT
+              valueFrom:
+                configMapKeyRef:
+                  name: jogos-config
+                  key: DB_ENCRYPT
+
+            - name: DB_TRUST_CERT
+              valueFrom:
+                configMapKeyRef:
+                  name: jogos-config
+                  key: DB_TRUST_CERT
+
+            - name: DB_TIMEOUT
+              valueFrom:
+                configMapKeyRef:
+                  name: jogos-config
+                  key: DB_TIMEOUT
+
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: jogos-secrets
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: jogos-secrets
+                  key: DB_PASSWORD
+
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 256Mi

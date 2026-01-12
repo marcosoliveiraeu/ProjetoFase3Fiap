@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|c:\\users\\administrador\\documents\\github\\fiapfase3\\processapagamentos\\processapagamentos\\processamento\\service\\gatewaypagamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|solutionrelative:service\\gatewaypagamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|c:\\users\\administrador\\documents\\github\\fiapfase3\\processapagamentos\\processapagamentos\\processamento\\service\\processarpagamentoqueuefunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|solutionrelative:service\\processarpagamentoqueuefunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|c:\\users\\administrador\\documents\\github\\fiapfase3\\processapagamentos\\processapagamentos\\processamento\\local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|solutionrelative:local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|c:\\users\\administrador\\documents\\github\\fiapfase3\\processapagamentos\\processapagamentos\\processamento\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02AF51CF-93C9-9562-2A73-D159A220DC35}|Processamento.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,26 +46,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "GatewayPagamentoService.cs",
+              "DocumentMoniker": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\Service\\GatewayPagamentoService.cs",
+              "RelativeDocumentMoniker": "Service\\GatewayPagamentoService.cs",
+              "ToolTip": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\Service\\GatewayPagamentoService.cs",
+              "RelativeToolTip": "Service\\GatewayPagamentoService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T04:09:42.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T04:09:30.521Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "local.settings.json",
               "DocumentMoniker": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\local.settings.json",
               "RelativeDocumentMoniker": "local.settings.json",
               "ToolTip": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\local.settings.json",
               "RelativeToolTip": "local.settings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAADiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAB1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-10-07T03:18:56.55Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ProcessarPagamentoQueueFunction.cs",
               "DocumentMoniker": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\Service\\ProcessarPagamentoQueueFunction.cs",
               "RelativeDocumentMoniker": "Service\\ProcessarPagamentoQueueFunction.cs",
               "ToolTip": "C:\\Users\\Administrador\\Documents\\GitHub\\FiapFase3\\ProcessaPagamentos\\ProcessaPagamentos\\Processamento\\Service\\ProcessarPagamentoQueueFunction.cs",
               "RelativeToolTip": "Service\\ProcessarPagamentoQueueFunction.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAB4AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAqwDIAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-07T03:39:57.937Z",
               "EditorCaption": ""

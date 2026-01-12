@@ -2,7 +2,7 @@
 trigger:
   branches:
     include:
-      - main
+      - master
 
 pool:
   #name: self-hosted
@@ -15,6 +15,7 @@ variables:
   resourceGroup: 'grupo3' 
   location: 'westus2'           
   containerPort: '8080'
+  aksClusterName: 'fase3-cluster'
 
 stages:
   - stage: Build
@@ -46,38 +47,26 @@ stages:
                 $(Build.BuildId)
 
   - stage: Deploy
-    displayName: 'Deploy para Container Instance'
+    displayName: 'Deploy no AKS'
     dependsOn: Build
     jobs:
-      - job: DeployToACI
-        steps:
-          - task: AzureCLI@2
-            displayName: 'Atualiza Container Instance'
-            inputs:
-              azureSubscription: 'FiapConnection'
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az container delete \
-                  --name $(containerGroupName) \
-                  --resource-group $(resourceGroup) \
-                  --yes
+    - job: DeployToAKS
+      displayName: 'Aplicar manifests no Kubernetes'
+      steps:
+      - task: AzureCLI@2
+        displayName: 'Deploy usando kubectl'
+        inputs:
+          azureSubscription: 'FiapConnection'
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az aks get-credentials \
+              --resource-group $(resourceGroup) \
+              --name $(aksClusterName) \
+              --overwrite-existing
 
-                az container create \
-                  --resource-group $(resourceGroup) \
-                  --name $(containerGroupName) \
-                  --image $(dockerRegistry)/$(imageName):latest \
-                  --registry-login-server $(dockerRegistry) \
-                  --registry-username $(ACR_USERNAME) \
-                  --registry-password $(ACR_PASSWORD) \
-                  --dns-name-label $(containerGroupName)-dns \
-                  --ports $(containerPort) \
-                  --cpu 1 \
-                  --memory 1.5 \
-                  --location $(location) \
-                  --log-analytics-workspace 'f8b4ac94-8c26-400f-bd9d-72bed52ed183' \
-                  --log-analytics-workspace-key 'wTb+fo5ts3l01JvUQq3bBT2qB/Oeqjv/6ft+Aavk7rdwv+L47PS8YWQl+HoUvMa/Y8ONHiDyU4721kuAYkoqfA=='\
-                  --os-type Linux
-            env:
-              ACR_USERNAME: $(ACR_USERNAME)
-              ACR_PASSWORD: $(ACR_PASSWORD)
+            kubectl apply -f k8s/
+
+            kubectl delete ingress pagamentos-ingress -n fase3 --ignore-not-found
+
+            kubectl apply -f k8s/
